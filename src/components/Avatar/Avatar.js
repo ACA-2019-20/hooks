@@ -6,18 +6,16 @@ import { ItemContext } from "../Cards/Cards";
 import "./Avatar.css";
 
 export default function Avatar({ width, description }) {
+  const { avatar } = React.useContext(ItemContext);
+
   return (
-    <ItemContext.Consumer>
-      {({ avatar }) => (
-        <img
-          className="avatar"
-          width={width}
-          height={width}
-          src={avatar}
-          alt={description}
-        />
-      )}
-    </ItemContext.Consumer>
+    <img
+      className="avatar"
+      width={width}
+      height={width}
+      src={avatar}
+      alt={description}
+    />
   );
 }
 
