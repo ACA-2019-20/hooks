@@ -1,25 +1,39 @@
 import React from "react";
+import { CircularProgress, Button } from "@material-ui/core";
+
 import Cards from "./components/Cards";
+import getUsers from "./__mocks__/getUsers.mock";
 
-const users = [
-  {
-    id: 1,
-    name: "Vrezh",
-    position: "Developer",
-    avatar:
-      "https://www.veracode.com/sites/default/files/styles/blog_post_resize_960/public/developer-guide-blog-2.png?itok=JQGRVjEX"
-  },
-  {
-    id: 2,
-    name: "Valod",
-    position: "Developer",
-    avatar:
-      "https://www.veracode.com/sites/default/files/styles/blog_post_resize_960/public/developer-guide-blog-2.png?itok=JQGRVjEX"
+export default function App() {
+  const [users, setUsers] = React.useState([]);
+  const [isUsersLoading, setUsersLoading] = React.useState(false);
+  const [isRefresh, toggleRefresh] = React.useState(false);
+
+  React.useEffect(() => {
+    setUsersLoading(true);
+
+    getUsers({ isRefresh }).then(users => {
+      setUsers(users);
+      setUsersLoading(false);
+    });
+
+    return () => {};
+  }, [isRefresh]);
+
+  if (isUsersLoading) {
+    return <CircularProgress />;
   }
-];
 
-function App() {
-  return <Cards items={users} />;
+  return (
+    <>
+      <Cards items={users} />
+      <Button
+        onClick={() => toggleRefresh(isRefresh => !isRefresh)}
+        variant="contained"
+        color="primary"
+      >
+        Refresh Users
+      </Button>
+    </>
+  );
 }
-
-export default App;
