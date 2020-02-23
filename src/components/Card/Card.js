@@ -1,13 +1,16 @@
 import React from "react";
 
-export default function Card({ id, name, position, avatar }) {
+import Flex from "../Flex";
+import Avatar from "../Avatar";
+
+export default function Card({ name, position, avatar }) {
   return (
-    <div className="card">
-      <img width="200" src={avatar} alt="User Image" />
+    <Flex flexDirection="row" alignItems="center">
+      <Avatar width="50" avatar={avatar} description="User Image" />
       <div>
         <h3>{name}</h3>
         <p>{position}</p>
       </div>
-    </div>
+    </Flex>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./components/Card";
+import Cards from "./components/Cards";
 
 const users = [
   {
@@ -19,9 +19,7 @@ const users = [
 ];
 
 function App() {
-  return users.map(({ avatar, name, position, id }) => (
-    <Card avatar={avatar} key={id} name={name} position={position} />
-  ));
+  return <Cards items={users} />;
 }
 
 export default App;
